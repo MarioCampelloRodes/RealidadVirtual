@@ -6,7 +6,7 @@ public class VRGun : MonoBehaviour
     public GameObject bullet;
     public Transform shootPoint;
     public float bulletSpeed;
-
+    public AmmoController ammoController;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,13 +21,18 @@ public class VRGun : MonoBehaviour
 
     public void Shoot()
     {
-        GameObject spawnedBullet = Instantiate(bullet);
+        if (ammoController.ammoLeft)
+        {
+            GameObject spawnedBullet = Instantiate(bullet);
 
-        spawnedBullet.transform.position = shootPoint.position;
-        spawnedBullet.transform.rotation = shootPoint.rotation;
+            spawnedBullet.transform.position = shootPoint.position;
+            spawnedBullet.transform.rotation = shootPoint.rotation;
 
-        spawnedBullet.GetComponent<Rigidbody>().linearVelocity = shootPoint.forward * bulletSpeed;
+            spawnedBullet.GetComponent<Rigidbody>().linearVelocity = shootPoint.forward * bulletSpeed;
 
-        Destroy(bullet, 5f);
+            ammoController.ReduceAmmo();
+
+            Destroy(bullet, 5f);
+        }
     }
 }
