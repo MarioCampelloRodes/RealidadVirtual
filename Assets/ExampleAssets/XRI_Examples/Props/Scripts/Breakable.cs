@@ -36,7 +36,7 @@ namespace UnityEngine.XR.Content.Interaction
             if (m_Destroyed)
                 return;
 
-            if (collision.gameObject.tag.Equals(m_ColliderTag, System.StringComparison.InvariantCultureIgnoreCase))
+            if (collision.gameObject.CompareTag("Destroyer"))
             {
                 m_Destroyed = true;
                 var brokenVersion = Instantiate(m_BrokenVersion, transform.position, transform.rotation);

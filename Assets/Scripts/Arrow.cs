@@ -11,10 +11,10 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Crossbow"))
+        if (!other.CompareTag("Crossbow") && !other.CompareTag("Player"))
         {
             rb.linearVelocity = Vector3.zero;
-            rb.isKinematic = true;
+            rb.useGravity = false;
         }
     }
 }
